@@ -314,7 +314,7 @@ EOF
 chown www-data.www-data $STORAGE_ROOT/owncloud/config.php
 
 # Update config.php in case S3 object storage backend if configured
-if [[ -n $NEXTCLOUD_S3_BUCKET ]]; then
+if [[ -n "${NEXTCLOUD_S3_BUCKET:-}" ]]; then
 	php$PHP_VER <<EOF > $CONFIG_TEMP && mv $CONFIG_TEMP $STORAGE_ROOT/owncloud/config.php;
 <?php
 include("$STORAGE_ROOT/owncloud/config.php");
