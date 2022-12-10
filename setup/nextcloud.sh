@@ -319,7 +319,7 @@ if [[ -n "${NEXTCLOUD_S3_BUCKET:-}" ]]; then
 <?php
 include("$STORAGE_ROOT/owncloud/config.php");
 
-\$CONFIG['objectstore'] => array(
+\$CONFIG['objectstore'] = array(
 	'class' => '\\OC\\Files\\ObjectStore\\S3',
     'arguments' => array(
         'bucket' => '$NEXTCLOUD_S3_BUCKET',
