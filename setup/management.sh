@@ -36,12 +36,17 @@ hide_output $venv/bin/pip install --upgrade pip
 # Install other Python 3 packages used by the management daemon.
 # The first line is the packages that Josh maintains himself!
 # NOTE: email_validator is repeated in setup/questions.sh, so please keep the versions synced.
+# NOTE: Added --ignore-installed to fix
+# ERROR: Cannot uninstall 'blinker'. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall.
 hide_output $venv/bin/pip install --upgrade --ignore-installed \
-	rtyaml "email_validator>=1.0.0" "exclusiveprocess" \
 	flask dnspython python-dateutil expiringdict gunicorn \
 	qrcode[pil] pyotp \
 	"idna>=2.0.0" "cryptography==37.0.2" psutil postfix-mta-sts-resolver \
 	b2sdk boto3
+
+# NOTE: Added "urllib3==1.26.15" "requests-toolbelt==0.10.1" to fix
+# ImportError: cannot import name 'appengine' from 'urllib3.contrib' (/usr/local/lib/python3.10/dist-packages/urllib3/contrib/__init__.py)
+$venv/bin/pip install rtyaml "email_validator>=1.0.0" "exclusiveprocess"
 
 # CONFIGURATION
 
